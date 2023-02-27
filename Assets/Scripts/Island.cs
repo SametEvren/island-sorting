@@ -18,8 +18,7 @@ public class Island : MonoBehaviour
     public bool IsComplete => _isComplete;
     public List<Slot> emptySlots = new();
     public int EmptySlotCount => Slots.Count(slot => slot.IsEmpty);
-    public int emptySlotCount;
-    
+
     public void OnValidate()
     {
         DoAssertions();
@@ -40,11 +39,6 @@ public class Island : MonoBehaviour
         }
     }
 
-    private void Update()
-    {
-        emptySlotCount = EmptySlotCount;
-    }
-
     private void CheckIfComplete()
     {
         if (Slots.Any(slot => slot.ItemOnSlot is null || slot.ItemOnSlot.SortingColor != Slots[0].ItemOnSlot.SortingColor))
@@ -55,7 +49,7 @@ public class Island : MonoBehaviour
         _isComplete = true;
     }
 
-    private void ChangeEmpty()
+    public void ChangeEmpty()
     {
         emptySlots.Clear();
         foreach (var slot in Slots)

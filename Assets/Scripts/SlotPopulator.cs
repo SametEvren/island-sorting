@@ -29,7 +29,13 @@ public class SlotPopulator : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        Gizmos.color = ColorDictionary.GetColor(itemColor);
+        var color = !Application.isPlaying 
+            ? itemColor  
+            : slot.IsEmpty 
+                ? SortingColor.Blank 
+                : slot.ItemOnSlot.SortingColor;
+        
+        Gizmos.color = ColorDictionary.GetColor(color);
         
         Gizmos.DrawSphere(transform.position,0.03f);
     }

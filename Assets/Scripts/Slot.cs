@@ -4,7 +4,7 @@ using UnityEngine;
 public class Slot : MonoBehaviour
 {
 
-    private SortableItem itemOnSlot;
+    public SortableItem itemOnSlot;
     public SortableItem ItemOnSlot => itemOnSlot;
     public bool IsEmpty => ItemOnSlot is null;
     public event Action OnItemChanged;

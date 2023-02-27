@@ -15,7 +15,7 @@ public static class ColorDictionary
         {SortingColor.White, Color.white},
         {SortingColor.Orange, new Color(1,0.647f,0,1)},
         {SortingColor.Cyan, Color.cyan},
-        {SortingColor.Blank,Color.clear}
+        {SortingColor.Blank,Color.grey}
     };
 
     public static Color GetColor(SortingColor sortingColor)

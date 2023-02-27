@@ -6,9 +6,13 @@ public class SortablePerson : SortableItem
 {
     [SerializeField] private SkinnedMeshRenderer skinnedMeshRenderer;
     private const float Speed = 3;
+    private Coroutine _followCoroutine;
+    private Slot _currentSlot;
+    public Island lastIsland;
 
     private void Start()
     {
+        _currentSlot = GetComponentInParent<Slot>();
         UpdateMaterialColor();
     }
 
@@ -22,12 +26,21 @@ public class SortablePerson : SortableItem
     {
         if (island.emptySlots.Count == 0)
             return;
+        
+        _currentSlot.ClearSlot();
         var targetSlot = island.emptySlots[0];
         island.emptySlots.RemoveAt(0);
         targetSlot.SetItemOnSlot(this);
-        GetComponentInParent<Slot>().ClearSlot();
+        _currentSlot = targetSlot;
         
-        StartCoroutine(FollowPath(pathPoints, targetSlot,delay,lineRenderer,isLastManMoving));
+        
+
+        if (_followCoroutine != null)
+        {
+            StopCoroutine(_followCoroutine);
+        }
+        
+        _followCoroutine = StartCoroutine(FollowPath(pathPoints, targetSlot,delay,lineRenderer,isLastManMoving));
     }
 
     private IEnumerator FollowPath(List<Transform> pathPoints, Slot targetSlot, float delay, LineRenderer lineRenderer, bool isLastManMoving)
