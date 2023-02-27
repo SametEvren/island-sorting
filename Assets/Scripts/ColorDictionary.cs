@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class ColorDictionary
+public static class ColorDictionary
 {
     static Dictionary<SortingColor,Color> _colorDictionary = new()
     {

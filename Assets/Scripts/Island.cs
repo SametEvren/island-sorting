@@ -16,10 +16,10 @@ public class Island : MonoBehaviour
     public Transform AccessPoint => accessPoint;
     public Transform IslandBorder => islandBorder;
     public bool IsComplete => _isComplete;
+    public List<Slot> emptySlots = new();
+    public int EmptySlotCount => Slots.Count(slot => slot.IsEmpty);
+    public int emptySlotCount;
     
-    public List<Slot> Empty = new();
-    
-
     public void OnValidate()
     {
         DoAssertions();
@@ -27,19 +27,22 @@ public class Island : MonoBehaviour
 
     private void Start()
     {
+        //These are for making path drawing more clear. No need to be child after the game starts.
         accessPoint.transform.parent = null;
         islandBorder.transform.parent = null;
         
         foreach (var slot in Slots)
         {
-            if(slot.IsEmpty)
-                Empty.Add(slot);
-        }
-        foreach (var slot in Slots)
-        {
             slot.OnItemChanged += CheckIfComplete;
             slot.OnItemChanged += ChangeEmpty;
+            
+            if(slot.IsEmpty) emptySlots.Add(slot);
         }
+    }
+
+    private void Update()
+    {
+        emptySlotCount = EmptySlotCount;
     }
 
     private void CheckIfComplete()
@@ -54,28 +57,14 @@ public class Island : MonoBehaviour
 
     private void ChangeEmpty()
     {
-        Empty.Clear();
+        emptySlots.Clear();
         foreach (var slot in Slots)
         {
             if(slot.IsEmpty)
-                Empty.Add(slot);
+                emptySlots.Add(slot);
         }
     }
-
-    private void DoAssertions()
-    {
-        Assert.IsNotNull(AccessPoint);
-        Assert.IsTrue(Slots.Count > 0,"Slots can not be empty.");
-
-        if (Slots.Count <= 0) return;
-
-        Assert.IsTrue(Slots.Count % RowLength == 0, $"Slot count should be dividable by row length: {RowLength}");
-        foreach (var slot in Slots)
-        {
-            Assert.IsNotNull(slot); 
-        }
-    }
-
+    
     public void TransferItems(Island targetIsland, List<Transform> path, LineRenderer lineRenderer)
     {
         List<Slot> slotsToMove = new();
@@ -109,11 +98,12 @@ public class Island : MonoBehaviour
             slotsToMove.Clear();
             return;
         }
+        var availableSlotCount = Math.Min(slotsToMove.Count, targetIsland.EmptySlotCount);
         
-        for (var i = 0; i < slotsToMove.Count; i++)
+        for (var i = 0; i < availableSlotCount; i++)
         {
             float delay = i / 5f;
-            bool islastManMoving = false || i == slotsToMove.Count - 1;
+            bool islastManMoving = false || i == availableSlotCount - 1;
             
             slotsToMove[i].ItemOnSlot.MoveToIsland(targetIsland,path,delay,lineRenderer, islastManMoving);
         }
@@ -133,11 +123,28 @@ public class Island : MonoBehaviour
         }
         return SortingColor.Blank;
     }
+    
+    private void DoAssertions()
+    {
+        Assert.IsNotNull(AccessPoint);
+        Assert.IsTrue(Slots.Count > 0,"Slots can not be empty.");
+
+        if (Slots.Count <= 0) return;
+
+        Assert.IsTrue(Slots.Count % RowLength == 0, $"Slot count should be dividable by row length: {RowLength}");
+        foreach (var slot in Slots)
+        {
+            Assert.IsNotNull(slot); 
+        }
+    }
+
+    
     private void OnDestroy()
     {
         foreach (var slot in Slots)
         {
             slot.OnItemChanged -= CheckIfComplete;
+            slot.OnItemChanged -= ChangeEmpty;
         }
     }
 }

@@ -22,10 +22,10 @@ public class SortablePerson : SortableItem
 
     public override void MoveToIsland(Island island, List<Transform> pathPoints, float delay, LineRenderer lineRenderer, bool isLastManMoving)
     {
-        if (island.Empty.Count == 0)
+        if (island.emptySlots.Count == 0)
             return;
-        var targetSlot = island.Empty[0];
-        island.Empty.RemoveAt(0);
+        var targetSlot = island.emptySlots[0];
+        island.emptySlots.RemoveAt(0);
         targetSlot.SetItemOnSlot(this);
         GetComponentInParent<Slot>().ClearSlot();
         

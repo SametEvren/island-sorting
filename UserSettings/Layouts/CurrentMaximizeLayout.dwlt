@@ -225,9 +225,9 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 0af4faff
-      m_LastClickedID: -330742
-      m_ExpandedIDs: acc8f8ffeaf1faff42f2faff0af4faff0cf4faffccfbfaffd4fdfcffeefefcff8242fdff9c43fdffd045fdfff847fdfffa47fdfffc47fdff786ffeff9098ffff06faffff16faffff82faffff1afbffff2efbffff30fbffff
+      m_SelectedIDs: daf2faff
+      m_LastClickedID: -331046
+      m_ExpandedIDs: acc8f8ffeaf1faff0cf4faffccfbfaffd4fdfcffeefefcff8242fdff9c43fdffd045fdfff847fdfffa47fdfffc47fdff786ffeff9098ffff06faffff16faffff82faffff1afbffff2efbffff30fbffff
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -536,9 +536,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: -0.593887, y: -0.14861804, z: 6.0300055}
+    m_Target: {x: -0.83720744, y: -0.22724968, z: 3.767133}
     speed: 2
-    m_Value: {x: -0.593887, y: -0.14861804, z: 6.0300055}
+    m_Value: {x: -0.83720744, y: -0.22724968, z: 3.767133}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0

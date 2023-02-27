@@ -20,7 +20,7 @@ public class PathCreator : MonoBehaviour
         
         if (_startingIsland is null)
         {
-            if (tappedIsland.Empty.Count == 16)
+            if (tappedIsland.emptySlots.Count == 16)
                 return;
             
             _startingIsland = tappedIsland;
