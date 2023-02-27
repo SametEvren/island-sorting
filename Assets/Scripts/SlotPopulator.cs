@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class SlotPopulator : MonoBehaviour
 {
@@ -12,7 +11,7 @@ public class SlotPopulator : MonoBehaviour
         PopulateSlot();
     }
 
-    public void PopulateSlot()
+    private void PopulateSlot()
     {
         if (slot.ItemOnSlot is not null)
         {

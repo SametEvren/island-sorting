@@ -5,12 +5,10 @@ using UnityEngine;
 public class SortablePerson : SortableItem
 {
     [SerializeField] private SkinnedMeshRenderer skinnedMeshRenderer;
-    public float _speed;
-    private float _waitTime = 0f;
+    private const float Speed = 3;
 
     private void Start()
     {
-        _speed = 3;
         UpdateMaterialColor();
     }
 
@@ -30,7 +28,6 @@ public class SortablePerson : SortableItem
         GetComponentInParent<Slot>().ClearSlot();
         
         StartCoroutine(FollowPath(pathPoints, targetSlot,delay,lineRenderer,isLastManMoving));
-
     }
 
     private IEnumerator FollowPath(List<Transform> pathPoints, Slot targetSlot, float delay, LineRenderer lineRenderer, bool isLastManMoving)
@@ -53,7 +50,7 @@ public class SortablePerson : SortableItem
 
             Vector3 positionToLookAt = new Vector3(targetWaypoint.x, transform.position.y, targetWaypoint.z);
             transform.LookAt(positionToLookAt);
-            transform.position = Vector3.MoveTowards(transform.position, targetWaypoint, _speed * Time.deltaTime);
+            transform.position = Vector3.MoveTowards(transform.position, targetWaypoint, Speed * Time.deltaTime);
             if (transform.position == targetWaypoint)
             {
                 if(targetWaypointIndex == 1)

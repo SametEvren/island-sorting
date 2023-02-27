@@ -84,4 +84,9 @@ public class PathCreator : MonoBehaviour
             to.IslandBorder
         };
     }
+
+    private void OnDestroy()
+    {
+        InputDetector.OnIslandTapped -= HandleIslandTapped;
+    }
 }
