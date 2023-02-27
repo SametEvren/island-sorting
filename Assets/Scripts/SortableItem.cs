@@ -9,5 +9,5 @@ public abstract class SortableItem : MonoBehaviour
 
     public virtual void SetSortingColor(SortingColor newColor) => sortingColor = newColor;
 
-    public abstract void MoveToSlot(Slot slot, List<Transform> pathPoints);
+    public abstract void MoveToIsland(Island island, List<Transform> pathPoints, float delay, LineRenderer lineRenderer, bool isLastManMoving);
 }

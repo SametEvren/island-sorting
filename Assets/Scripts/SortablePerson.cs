@@ -1,12 +1,16 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class SortablePerson : SortableItem
 {
     [SerializeField] private SkinnedMeshRenderer skinnedMeshRenderer;
+    public float _speed;
+    private float _waitTime = 0f;
 
     private void Start()
     {
+        _speed = 3;
         UpdateMaterialColor();
     }
 
@@ -16,10 +20,56 @@ public class SortablePerson : SortableItem
         ChangeCharacterColor(ColorDictionary.GetColor(newColor));
     }
 
-    public override void MoveToSlot(Slot slot, List<Transform> pathPoints)
+    public override void MoveToIsland(Island island, List<Transform> pathPoints, float delay, LineRenderer lineRenderer, bool isLastManMoving)
     {
-        
+        if (island.Empty.Count == 0)
+            return;
+        var targetSlot = island.Empty[0];
+        island.Empty.RemoveAt(0);
+        targetSlot.SetItemOnSlot(this);
+        GetComponentInParent<Slot>().ClearSlot();
+        transform.parent = null;
+        StartCoroutine(FollowPath(pathPoints, targetSlot,delay,lineRenderer,isLastManMoving));
+
     }
+
+    private IEnumerator FollowPath(List<Transform> pathPoints, Slot targetSlot, float delay, LineRenderer lineRenderer, bool isLastManMoving)
+    {
+        yield return new WaitForSeconds(delay);
+        GetComponent<Animator>().SetBool("isRunning",true);
+        int targetWaypointIndex = 1;
+        Vector3 targetWaypoint = pathPoints[targetWaypointIndex].position;
+        while (true)
+        {
+            if (transform.position == targetSlot.transform.position)
+            {
+                if(isLastManMoving)
+                    Destroy(lineRenderer);
+                
+                GetComponent<Animator>().SetBool("isRunning",false);
+                transform.rotation = transform.parent.parent.rotation;
+                break;
+            }
+            
+            transform.LookAt(targetWaypoint);
+            transform.position = Vector3.MoveTowards(transform.position, targetWaypoint, _speed * Time.deltaTime);
+            if (transform.position == targetWaypoint)
+            {
+                if (targetWaypointIndex == 3)
+                {
+                    targetWaypoint = targetSlot.transform.position;
+                }
+                else
+                {
+                    targetWaypointIndex += 1;
+                    targetWaypoint = pathPoints[targetWaypointIndex].position;
+                    transform.parent = targetSlot.transform;
+                }
+            }
+            yield return null;
+        }
+    }
+
 
     private void ChangeCharacterColor(Color newColor)
     {
