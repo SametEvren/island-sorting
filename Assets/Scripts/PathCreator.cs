@@ -1,11 +1,13 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class PathCreator : MonoBehaviour
 {
     [SerializeField] private LineRenderer line;
-    private Island _startingIsland, _targetIsland;
+    public Island _startingIsland, _targetIsland;
     
+    public static event Action<bool,Island> OnIslandSelected;
     
     private void Start()
     {
@@ -18,16 +20,33 @@ public class PathCreator : MonoBehaviour
         
         if (_startingIsland is null)
         {
+            if (tappedIsland.Empty.Count == 16)
+                return;
+            
             _startingIsland = tappedIsland;
+            OnIslandSelected(true,tappedIsland);
             return;
         }
         
         if (_startingIsland == tappedIsland)
         {  
+            OnIslandSelected(false,tappedIsland);
+            ResetSelection();
+            return;
+        }
+
+        var areColorsDifferent = _startingIsland.FindColorOfTargetIsland(_startingIsland) !=
+            tappedIsland.FindColorOfTargetIsland(tappedIsland) && tappedIsland.FindColorOfTargetIsland(tappedIsland) != SortingColor.Blank;
+        
+        if (areColorsDifferent)
+        {
+            OnIslandSelected(false,tappedIsland);
             ResetSelection();
             return;
         }
         
+        OnIslandSelected(false,tappedIsland);
+
         _targetIsland = tappedIsland;
         var path = CalculatePath(_startingIsland, _targetIsland);
         var lineRenderer = Instantiate(line, Vector3.zero, Quaternion.identity,transform);

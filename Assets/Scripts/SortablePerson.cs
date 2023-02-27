@@ -28,7 +28,7 @@ public class SortablePerson : SortableItem
         island.Empty.RemoveAt(0);
         targetSlot.SetItemOnSlot(this);
         GetComponentInParent<Slot>().ClearSlot();
-        transform.parent = null;
+        
         StartCoroutine(FollowPath(pathPoints, targetSlot,delay,lineRenderer,isLastManMoving));
 
     }
@@ -50,11 +50,14 @@ public class SortablePerson : SortableItem
                 transform.rotation = transform.parent.parent.rotation;
                 break;
             }
-            
-            transform.LookAt(targetWaypoint);
+
+            Vector3 positionToLookAt = new Vector3(targetWaypoint.x, transform.position.y, targetWaypoint.z);
+            transform.LookAt(positionToLookAt);
             transform.position = Vector3.MoveTowards(transform.position, targetWaypoint, _speed * Time.deltaTime);
             if (transform.position == targetWaypoint)
             {
+                if(targetWaypointIndex == 1)
+                    transform.parent = null;
                 if (targetWaypointIndex == 3)
                 {
                     targetWaypoint = targetSlot.transform.position;

@@ -27,6 +27,9 @@ public class Island : MonoBehaviour
 
     private void Start()
     {
+        accessPoint.transform.parent = null;
+        islandBorder.transform.parent = null;
+        
         foreach (var slot in Slots)
         {
             if(slot.IsEmpty)
@@ -116,7 +119,7 @@ public class Island : MonoBehaviour
         }
     }
 
-    private SortingColor FindColorOfTargetIsland(Island targetIsland)
+    public SortingColor FindColorOfTargetIsland(Island targetIsland)
     {
         for (var i = targetIsland.Slots.Count - 1; i >= 0; i--)
         {
