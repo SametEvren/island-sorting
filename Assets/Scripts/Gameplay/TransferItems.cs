@@ -1,13 +1,14 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
+using Gameplay.Islands;
 using Gameplay.Slots;
 using UnityEngine;
 using Utility;
 
-namespace Gameplay.Islands
+namespace Gameplay
 {
     public static class TransferItems
     {
+        private const float MoveDelay = 0.2f;
         public static void MoveItems(Island sourceIsland, Island targetIsland, List<Transform> path, LineRenderer lineRenderer)
         {
             List<Slot> slotsToMove = new List<Slot>();
@@ -34,7 +35,7 @@ namespace Gameplay.Islands
                 slotsToMove.Add(slot);
             }
 
-            var colorOfTargetIsland = FindColorOfTargetIsland(targetIsland);
+            var colorOfTargetIsland = IslandHelper.FindColorOfTargetIsland(targetIsland);
 
             if (colorOfTargetIsland != colorToMove && colorOfTargetIsland != SortingColor.Blank)
             {
@@ -46,27 +47,11 @@ namespace Gameplay.Islands
 
             for (var i = 0; i < availableSlotCount; i++)
             {
-                float delay = i / 5f;
+                float delay = i * MoveDelay;
                 bool isLastManMoving = false || i == availableSlotCount - 1;
 
                 slotsToMove[i].ItemOnSlot.MoveToIsland(targetIsland, path, delay, lineRenderer, isLastManMoving);
             }
-        }
-
-        public static SortingColor FindColorOfTargetIsland(Island targetIsland)
-        {
-            for (var i = targetIsland.Slots.Count - 1; i >= 0; i--)
-            {
-                var slot = targetIsland.Slots[i];
-
-                if (slot.IsEmpty)
-                    continue;
-
-                var targetColor = slot.ItemOnSlot.SortingColor;
-                return targetColor;
-            }
-
-            return SortingColor.Blank;
         }
     }
 }

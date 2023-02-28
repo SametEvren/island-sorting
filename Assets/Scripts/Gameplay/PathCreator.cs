@@ -39,8 +39,8 @@ namespace Gameplay
                 return;
             }
 
-            var areColorsDifferent = TransferItems.FindColorOfTargetIsland(startingIsland) !=
-                TransferItems.FindColorOfTargetIsland(tappedIsland) && TransferItems.FindColorOfTargetIsland(tappedIsland) != SortingColor.Blank;
+            var areColorsDifferent = IslandHelper.FindColorOfTargetIsland(startingIsland) !=
+                IslandHelper.FindColorOfTargetIsland(tappedIsland) && IslandHelper.FindColorOfTargetIsland(tappedIsland) != SortingColor.Blank;
         
             if (areColorsDifferent)
             {
