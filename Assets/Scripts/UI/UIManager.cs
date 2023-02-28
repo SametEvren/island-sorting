@@ -1,5 +1,6 @@
 using System;
 using DG.Tweening;
+using Gameplay;
 using Managers;
 using TMPro;
 using UnityEngine;
@@ -16,6 +17,7 @@ namespace UI
         {
             RenderUndo();
             MovementManager.OnUndo += RenderUndo;
+            LevelController.OnWin += ShowWinScreen;
         }
 
         public void RestartTheLevel()
@@ -44,6 +46,7 @@ namespace UI
         private void OnDestroy()
         {
             MovementManager.OnUndo -= RenderUndo;
+            LevelController.OnWin -= ShowWinScreen;
         }
     }
 }

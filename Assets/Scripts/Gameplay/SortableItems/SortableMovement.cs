@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using Gameplay.Islands;
 using Gameplay.Slots;
@@ -8,7 +9,8 @@ using UnityEngine;
 namespace Gameplay.SortableItems
 {
     public class SortableMovement : MonoBehaviour
-    {        
+    {
+        public static event Action OnGroupMoved;
         private static readonly int IsRunning = Animator.StringToHash("isRunning");
         private const float Speed = 3;
         private Coroutine _followCoroutine;
@@ -67,11 +69,15 @@ namespace Gameplay.SortableItems
             {
                 if (transform.position == targetSlot.transform.position)
                 {
-                    if(isLastManMoving)
-                        Destroy(lineRenderer);
-                
                     GetComponent<Animator>().SetBool(IsRunning,false);
                     transform.rotation = transform.parent.parent.rotation;
+                    
+                    if (isLastManMoving)
+                    {
+                        Destroy(lineRenderer);
+                        OnGroupMoved?.Invoke();
+                    }
+                    
                     _lineRenderer = null;
                     _followCoroutine = null;
                     break;
@@ -121,5 +127,6 @@ namespace Gameplay.SortableItems
             
             howManyTimesMoved--;
         }
+        
     }
 }

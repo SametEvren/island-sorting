@@ -26,6 +26,7 @@ namespace Gameplay.Islands
         public bool IsComplete => _isComplete;
         public List<Slot> emptySlots = new();
         public int EmptySlotCount => Slots.Count(slot => slot.IsEmpty);
+        public bool IsEmpty => EmptySlotCount >= Slots.Count;
 
         public void OnValidate()
         {
