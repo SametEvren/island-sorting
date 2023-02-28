@@ -39,8 +39,8 @@ namespace Gameplay
                 return;
             }
 
-            var areColorsDifferent = startingIsland.FindColorOfTargetIsland(startingIsland) !=
-                tappedIsland.FindColorOfTargetIsland(tappedIsland) && tappedIsland.FindColorOfTargetIsland(tappedIsland) != SortingColor.Blank;
+            var areColorsDifferent = TransferItems.FindColorOfTargetIsland(startingIsland) !=
+                TransferItems.FindColorOfTargetIsland(tappedIsland) && TransferItems.FindColorOfTargetIsland(tappedIsland) != SortingColor.Blank;
         
             if (areColorsDifferent)
             {
@@ -55,7 +55,7 @@ namespace Gameplay
             var path = CalculatePath(startingIsland, targetIsland);
             var lineRenderer = Instantiate(line, Vector3.zero, Quaternion.identity,transform);
             DrawPath(path, lineRenderer);
-            startingIsland.TransferItems(targetIsland, path, lineRenderer);
+            TransferItems.MoveItems(startingIsland,targetIsland, path, lineRenderer);
             ResetSelection();
         }
         

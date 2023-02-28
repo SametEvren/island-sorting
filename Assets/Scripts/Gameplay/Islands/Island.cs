@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using Gameplay.Slots;
@@ -11,9 +10,11 @@ namespace Gameplay.Islands
     public class Island : MonoBehaviour
     {
         private const uint RowLength = 4;
+
         [SerializeField] private List<Slot> slots;
         [SerializeField] private Transform accessPoint;
-        [SerializeField] private Transform islandBorder; 
+        [SerializeField] private Transform islandBorder;
+        
         private bool _isComplete;
     
         public List<Slot> Slots => slots;
@@ -62,66 +63,7 @@ namespace Gameplay.Islands
                     emptySlots.Add(slot);
             }
         }
-    
-        public void TransferItems(Island targetIsland, List<Transform> path, LineRenderer lineRenderer)
-        {
-            List<Slot> slotsToMove = new();
 
-            var colorToMove = SortingColor.Blank;
-        
-            for (var i = Slots.Count - 1; i >= 0; i--)
-            {
-                var slot = Slots[i];
-            
-                if(slot.IsEmpty)
-                    continue;
-            
-                if (colorToMove == SortingColor.Blank)
-                {
-                    colorToMove = slot.ItemOnSlot.SortingColor;
-                    slotsToMove.Add(slot);
-                    continue;
-                }
-
-                if (colorToMove != slot.ItemOnSlot.SortingColor)
-                    break;
-            
-                slotsToMove.Add(slot);
-            }
-
-            var colorOfTargetIsland = FindColorOfTargetIsland(targetIsland);
-
-            if (colorOfTargetIsland != colorToMove && colorOfTargetIsland != SortingColor.Blank)
-            {
-                slotsToMove.Clear();
-                return;
-            }
-            var availableSlotCount = Math.Min(slotsToMove.Count, targetIsland.EmptySlotCount);
-        
-            for (var i = 0; i < availableSlotCount; i++)
-            {
-                float delay = i / 5f;
-                bool islastManMoving = false || i == availableSlotCount - 1;
-            
-                slotsToMove[i].ItemOnSlot.MoveToIsland(targetIsland,path,delay,lineRenderer, islastManMoving);
-            }
-        }
-
-        public SortingColor FindColorOfTargetIsland(Island targetIsland)
-        {
-            for (var i = targetIsland.Slots.Count - 1; i >= 0; i--)
-            {
-                var slot = targetIsland.Slots[i];
-            
-                if(slot.IsEmpty)
-                    continue;
-            
-                var targetColor = slot.ItemOnSlot.SortingColor;
-                return targetColor;
-            }
-            return SortingColor.Blank;
-        }
-    
         private void DoAssertions()
         {
             Assert.IsNotNull(AccessPoint);
@@ -145,11 +87,5 @@ namespace Gameplay.Islands
                 slot.OnItemChanged -= ChangeEmpty;
             }
         }
-    }
-
-    [Serializable]
-    public class SlotRow
-    { 
-        public List<Slot> slots;
     }
 }
