@@ -1,5 +1,6 @@
 using DG.Tweening;
 using Gameplay.Path;
+using Managers;
 using UnityEngine;
 
 namespace Gameplay.Islands
@@ -14,6 +15,7 @@ namespace Gameplay.Islands
         private void Start()
         {
             PathCreator.OnIslandSelected += MoveIsland;
+            MovementManager.OnUndo += SnapIsland;
         }
 
         public void MoveIsland(bool isMovingUp, Island island)
@@ -26,9 +28,16 @@ namespace Gameplay.Islands
             _movingSequence = DOTween.Sequence(transform.DOMoveY(isMovingUp ? UpYValue : DownYValue, 0.5f));
         }
 
+        private void SnapIsland()
+        {
+            _movingSequence.Kill();
+            transform.position = new Vector3(transform.position.x, DownYValue, transform.position.z);
+        }
+        
         private void OnDestroy()
         {
             PathCreator.OnIslandSelected -= MoveIsland;
+            MovementManager.OnUndo -= SnapIsland;
         }
     }
 }

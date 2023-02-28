@@ -224,24 +224,24 @@ MonoBehaviour:
     m_SaveData: []
   m_SceneHierarchy:
     m_TreeViewState:
-      scrollPos: {x: 0, y: 54}
-      m_SelectedIDs: 1c2cfeff
-      m_LastClickedID: -119780
-      m_ExpandedIDs: f69cf6ff7cd1f6ffcafff6ff8af4fdffc62cfefff637feff8eb6ffff92b6ffffd2b6ffffd6b6ffff62cdffff76d7ffff08d9ffffb2f7ffffc2f7ffff2af8ffff2ef8ffff3ef8ffffaaf8ffffb2f8ffffbaf8ffffc2f8ffffcaf8ffffd2f8ffffdaf8ffffe2f8ffffe6f8fffff6f8ffff0efaffff16faffff1efaffff26faffff2efaffff36faffff3efaffff46faffff4afaffff5afaffffbafafffff2fafffffafaffff16fbffff26fbffff30fbffffde56000076570000
+      scrollPos: {x: 0, y: 0}
+      m_SelectedIDs: 36f8ffff
+      m_LastClickedID: -1994
+      m_ExpandedIDs: f69cf6ff7cd1f6ffcafff6ff8af4fdffc62cfefff637feff8eb6ffff92b6ffffd2b6ffffd6b6ffff62cdffff76d7ffff08d9ffffb2f7ffffc2f7ffff2af8ffff2ef8ffff3ef8ffffaaf8ffffb2f8ffffbaf8ffffc2f8ffffcaf8ffffd2f8ffffdaf8ffffe2f8ffffe6f8ffff0efaffff16faffff1efaffff26faffff2efaffff36faffff3efaffff46faffff4afaffffbafafffff2faffff16fbffff26fbffff30fbffffde56000076570000
       m_RenameOverlay:
         m_UserAcceptedRename: 0
-        m_Name: 
-        m_OriginalName: 
+        m_Name: IslandBorder
+        m_OriginalName: IslandBorder
         m_EditFieldRect:
           serializedVersion: 2
           x: 0
           y: 0
           width: 0
           height: 0
-        m_UserData: 0
+        m_UserData: -1994
         m_IsWaitingForDelay: 0
         m_IsRenaming: 0
-        m_OriginalEventType: 11
+        m_OriginalEventType: 0
         m_IsRenamingFilename: 0
         m_ClientGUIView: {fileID: 5}
       m_SearchString: 
@@ -536,9 +536,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 0.41298166, y: 0.70398915, z: 2.5998638}
+    m_Target: {x: -1.5000006, y: 0.5, z: 2.0000005}
     speed: 2
-    m_Value: {x: 0.41298166, y: 0.70398915, z: 2.5998638}
+    m_Value: {x: -1.5000006, y: 0.5, z: 2.0000005}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -589,9 +589,9 @@ MonoBehaviour:
     speed: 2
     m_Value: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
   m_Size:
-    m_Target: 4.292313
+    m_Target: 1.9055122
     speed: 2
-    m_Value: 4.292313
+    m_Value: 1.8234566
   m_Ortho:
     m_Target: 1
     speed: 2
@@ -774,21 +774,21 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Animations
+    - Assets/Scripts/UI
     m_Globs: []
     m_OriginalText: 
   m_ViewMode: 1
   m_StartGridSize: 96
   m_LastFolders:
-  - Assets/Animations
+  - Assets/Scripts/UI
   m_LastFoldersGridSize: 96
   m_LastProjectPath: D:\Github\island-sorting
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 79}
-    m_SelectedIDs: 125b0000
-    m_LastClickedID: 23314
+    scrollPos: {x: 0, y: 138.20001}
+    m_SelectedIDs: 2c5b0000
+    m_LastClickedID: 23340
     m_ExpandedIDs: 00000000065b0000085b00000a5b000000ca9a3bffffff7f
     m_RenameOverlay:
       m_UserAcceptedRename: 0
@@ -842,9 +842,9 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_ListAreaState:
-    m_SelectedInstanceIDs: 62f8ffff
-    m_LastClickedInstanceID: -1950
-    m_HadKeyboardFocusLastEvent: 0
+    m_SelectedInstanceIDs: de560000
+    m_LastClickedInstanceID: 22238
+    m_HadKeyboardFocusLastEvent: 1
     m_ExpandedInstanceIDs: c62300003a5e00008cca00004eea00007ec8000000000000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
@@ -920,8 +920,8 @@ MonoBehaviour:
     y: 0
     width: 660.8
     height: 730.8
-  m_MinSize: {x: 276, y: 71}
-  m_MaxSize: {x: 4001, y: 4021}
+  m_MinSize: {x: 275, y: 50}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 15}
   m_Panes:
   - {fileID: 15}

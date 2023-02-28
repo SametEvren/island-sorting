@@ -49,34 +49,28 @@ namespace Gameplay
             var availableSlotCount = Mathf.Min(slotsToMove.Count, targetIsland.EmptySlotCount);
 
             var movementManager = MovementManager.instance;
-            // if(movementManager.lastMovedGroupListOfLists.movedGroups.Count > 0)
-            //     movementManager.lastMovedGroupListOfLists.movedGroups[movementManager.storedCount].transformList.Clear();
             
-            movementManager.currentGroup.transformList.Clear();
+            movementManager.currentMovement.movements.Clear();
             for (var i = 0; i < availableSlotCount; i++)
             {
                 float delay = i * MoveDelay;
                 bool isLastManMoving = false || i == availableSlotCount - 1;
                 
-                movementManager.currentGroup.transformList.Add(slotsToMove[i].ItemOnSlot.transform);
-                //movementManager.lastMovedGroupListOfLists.movedGroups[movementManager.storedCount].transformList.Add(slotsToMove[i].ItemOnSlot.transform);
-                slotsToMove[i].ItemOnSlot.GetComponent<SortableMovement>().MoveToIsland(targetIsland, path, delay, lineRenderer, isLastManMoving);
+                movementManager.currentMovement.movements.Add(slotsToMove[i].ItemOnSlot.SortableMovement);
+                slotsToMove[i].ItemOnSlot.SortableMovement.MoveToIsland(targetIsland, path, delay, lineRenderer, isLastManMoving);
             }
 
-            if (movementManager.lastMovedGroupListOfLists.movedGroups.Count == 5)
+            if (movementManager.undoableMoves.Count == 5)
             {
-                movementManager.lastMovedGroupListOfLists.movedGroups.RemoveAt(0);
+                movementManager.undoableMoves.RemoveAt(0);
             }
 
-            MovedGroupsTransforms newTr = new MovedGroupsTransforms()
+            var newInfo = new MovementInfo()
             {
-                transformList = new List<Transform>(movementManager.currentGroup.transformList)
+                movements = new List<SortableMovement>(movementManager.currentMovement.movements)
             };
             
-            movementManager.lastMovedGroupListOfLists.movedGroups.Add(newTr);
-            
-            if (movementManager.storedCount != 5)
-                movementManager.storedCount++;
+            movementManager.undoableMoves.Add(newInfo);
         }
     }
 }

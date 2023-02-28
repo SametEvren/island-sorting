@@ -2010,7 +2010,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f52d9ac17b6748f49b6276ececb9b62e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sortingColor: 5
+  sortingColor: -1
+  sortableMovement: {fileID: 1559553965753457451}
   skinnedMeshRenderer: {fileID: 4715553314412483188}
 --- !u!114 &1559553965753457451
 MonoBehaviour:
@@ -2024,6 +2025,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32bf28e5c45247ee9358a156e23a8d73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  previousPosition: {x: 0, y: 0, z: 0}
+  previousSlot: {fileID: 0}
+  lastFivePosition: []
+  lastFiveSlot: []
+  howManyTimesMoved: 0
 --- !u!1 &7849825606445366738
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Gameplay.SortableItems;
 using UnityEngine;
@@ -20,42 +21,31 @@ namespace Managers
         }
         #endregion
 
-        public MovedGroupsTransforms currentGroup = new();
-        public MovedGroupsTransformsLists lastMovedGroupListOfLists = new MovedGroupsTransformsLists();
-        public int storedCount;
-
+        public MovementInfo currentMovement = new();
+        public List<MovementInfo> undoableMoves = new();
+        public int RemainingUndos { get; private set; } = 5;
+        
+        private int UndoableMoveCount => undoableMoves.Count;
+        public static event Action OnUndo; 
         public void UndoMovement()
         {
-            // foreach (var movedGroupsTransforms in lastMovedGroup.listOfList)
-            // {
-            //     for (int i = 0; i < movedGroupsTransforms.transformList.Count; i++)
-            //     {
-            //         movedGroupsTransforms.transformList[i].GetComponent<SortableMovement>().Undo();
-            //     }
-            // }
-            if (storedCount <= 0)
+            if (UndoableMoveCount <= 0 || RemainingUndos <= 0)
                 return;
-            for (int i = 0; i < lastMovedGroupListOfLists.movedGroups[storedCount-1].transformList.Count; i++)
+            
+            foreach (var sortableMovement in undoableMoves[^1].movements)
             {
-                lastMovedGroupListOfLists.movedGroups[storedCount-1].transformList[i].GetComponent<SortableMovement>().Undo();
+                sortableMovement.Undo();
             }
 
-            lastMovedGroupListOfLists.movedGroups.RemoveAt(storedCount - 1);
-            storedCount--;
-
+            undoableMoves.RemoveAt(UndoableMoveCount - 1);
+            RemainingUndos--;
+            OnUndo?.Invoke();
         }
     }
     
     [System.Serializable]
-    public class MovedGroupsTransforms
+    public class MovementInfo
     {
-        public List<Transform> transformList;
+        public List<SortableMovement> movements;
     }
- 
-    [System.Serializable]
-    public class MovedGroupsTransformsLists
-    {
-        public List<MovedGroupsTransforms> movedGroups;
-    }
-    
 }

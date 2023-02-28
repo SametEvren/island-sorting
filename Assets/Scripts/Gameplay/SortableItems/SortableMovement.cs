@@ -17,7 +17,7 @@ namespace Gameplay.SortableItems
         public Vector3 previousPosition;
         public Slot previousSlot;
 
-        public List<Vector3> lastFivePosition;
+        
         public List<Slot> lastFiveSlot;
         public int howManyTimesMoved;
 
@@ -51,9 +51,6 @@ namespace Gameplay.SortableItems
             lastFiveSlot.Add(previousSlot);
             previousPosition = new Vector3(previousSlot.transform.position.x, 0.5f, previousSlot.transform.position.z);
             _currentSlot = targetSlot;
-
-            
-            lastFivePosition.Add(previousPosition);
 
             howManyTimesMoved++;
             
@@ -106,11 +103,11 @@ namespace Gameplay.SortableItems
         {
             if(_followCoroutine != null) StopCoroutine(_followCoroutine);
             
-            transform.position = lastFivePosition[howManyTimesMoved-1];
             _currentSlot.ClearSlot();
             GetComponent<SortablePerson>().SetItem(lastFiveSlot[howManyTimesMoved-1]);
             _currentSlot = lastFiveSlot[howManyTimesMoved-1];
-            transform.parent = _currentSlot.transform.parent;
+            transform.parent = _currentSlot.transform;
+            transform.localPosition = Vector3.zero;
             transform.rotation = transform.parent.parent.rotation;
             
             if (_lineRenderer != null)
@@ -120,7 +117,6 @@ namespace Gameplay.SortableItems
 
             GetComponent<Animator>().SetBool(IsRunning, false);
             
-            lastFivePosition.RemoveAt(howManyTimesMoved-1);
             lastFiveSlot.RemoveAt(howManyTimesMoved-1);
             
             howManyTimesMoved--;
