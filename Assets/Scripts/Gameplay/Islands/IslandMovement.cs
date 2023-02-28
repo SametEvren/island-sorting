@@ -1,4 +1,5 @@
 using DG.Tweening;
+using Gameplay.Path;
 using UnityEngine;
 
 namespace Gameplay.Islands

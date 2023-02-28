@@ -76,8 +76,7 @@ namespace Gameplay.Islands
                 Assert.IsNotNull(slot); 
             }
         }
-
-    
+        
         private void OnDestroy()
         {
             foreach (var slot in Slots)
