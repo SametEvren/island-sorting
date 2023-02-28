@@ -51,6 +51,8 @@ namespace Gameplay.Islands
         {
             if (Slots.Any(slot => slot.ItemOnSlot is null || slot.ItemOnSlot.SortingColor != Slots[0].ItemOnSlot.SortingColor))
             {
+                _isComplete = false;
+                flagOfIsland.gameObject.SetActive(false);
                 return;
             }
             flagOfIsland.gameObject.SetActive(true);

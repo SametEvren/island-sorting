@@ -2,6 +2,7 @@
 using Gameplay.Islands;
 using Gameplay.Slots;
 using Gameplay.SortableItems;
+using Managers;
 using UnityEngine;
 using Utility;
 
@@ -46,11 +47,13 @@ namespace Gameplay
 
             var availableSlotCount = Mathf.Min(slotsToMove.Count, targetIsland.EmptySlotCount);
 
+            MovementManager.instance.lastMovedGroup.Clear();
             for (var i = 0; i < availableSlotCount; i++)
             {
                 float delay = i * MoveDelay;
                 bool isLastManMoving = false || i == availableSlotCount - 1;
-
+                
+                MovementManager.instance.lastMovedGroup.Add(slotsToMove[i].ItemOnSlot.transform);
                 slotsToMove[i].ItemOnSlot.GetComponent<SortableMovement>().MoveToIsland(targetIsland, path, delay, lineRenderer, isLastManMoving);
             }
         }

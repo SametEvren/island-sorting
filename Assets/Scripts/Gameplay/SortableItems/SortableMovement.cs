@@ -12,10 +12,16 @@ namespace Gameplay.SortableItems
         private Coroutine _followCoroutine;
         private Slot _currentSlot;
         private LineRenderer _lineRenderer;
+        public Vector3 previousPosition;
+        public Slot previousSlot;
+        private static readonly int IsRunning = Animator.StringToHash("isRunning");
 
         private void Start()
         {
             _currentSlot = GetComponentInParent<Slot>();
+            previousSlot = GetComponentInParent<Slot>();
+            
+            previousPosition = new Vector3(transform.position.x,0.5f,transform.position.z);
         }
 
         public void MoveToIsland(Island island, List<Transform> pathPoints, float delay, LineRenderer lineRenderer, bool isLastManMoving)
@@ -25,7 +31,9 @@ namespace Gameplay.SortableItems
 
             if (_followCoroutine != null)
             {
-                Destroy(_lineRenderer.gameObject);
+                if(_lineRenderer != null)
+                    Destroy(_lineRenderer.gameObject);
+                
                 StopCoroutine(_followCoroutine);
             }
         
@@ -34,15 +42,18 @@ namespace Gameplay.SortableItems
             var targetSlot = island.emptySlots[0];
             island.emptySlots.RemoveAt(0);
             GetComponent<SortablePerson>().SetItem(targetSlot);
+            previousSlot = _currentSlot;
             _currentSlot = targetSlot;
-        
+
+            previousPosition = new Vector3(transform.position.x,0.5f,transform.position.z);
+            
             _followCoroutine = StartCoroutine(FollowPath(pathPoints, targetSlot,delay,lineRenderer,isLastManMoving));
         }
 
         private IEnumerator FollowPath(List<Transform> pathPoints, Slot targetSlot, float delay, LineRenderer lineRenderer, bool isLastManMoving)
         {
             yield return new WaitForSeconds(delay);
-            GetComponent<Animator>().SetBool("isRunning",true);
+            GetComponent<Animator>().SetBool(IsRunning,true);
             int targetWaypointIndex = 1;
             Vector3 targetWaypoint = pathPoints[targetWaypointIndex].position;
             while (true)
@@ -52,7 +63,7 @@ namespace Gameplay.SortableItems
                     if(isLastManMoving)
                         Destroy(lineRenderer);
                 
-                    GetComponent<Animator>().SetBool("isRunning",false);
+                    GetComponent<Animator>().SetBool(IsRunning,false);
                     transform.rotation = transform.parent.parent.rotation;
                     _lineRenderer = null;
                     _followCoroutine = null;
@@ -79,6 +90,25 @@ namespace Gameplay.SortableItems
                 }
                 yield return null;
             }
+        }
+
+        public void Undo()
+        {
+            if(_followCoroutine != null) StopCoroutine(_followCoroutine);
+            
+            transform.position = previousPosition;
+            _currentSlot.ClearSlot();
+            GetComponent<SortablePerson>().SetItem(previousSlot);
+            _currentSlot = previousSlot;
+            transform.parent = _currentSlot.transform.parent;
+            transform.rotation = transform.parent.parent.rotation;
+            
+            if (_lineRenderer != null)
+            {
+                Destroy(_lineRenderer.gameObject);
+            }
+
+            GetComponent<Animator>().SetBool(IsRunning, false);
         }
     }
 }
