@@ -3,6 +3,8 @@ using System.Linq;
 using Gameplay.Slots;
 using UnityEngine;
 using UnityEngine.Assertions;
+using Utility;
+
 
 namespace Gameplay.Islands
 {
@@ -13,6 +15,8 @@ namespace Gameplay.Islands
         [SerializeField] private List<Slot> slots;
         [SerializeField] private Transform accessPoint;
         [SerializeField] private Transform islandBorder;
+        [SerializeField] private Flag flagOfIsland;
+
         
         private bool _isComplete;
     
@@ -49,7 +53,8 @@ namespace Gameplay.Islands
             {
                 return;
             }
-
+            flagOfIsland.gameObject.SetActive(true);
+            flagOfIsland.flag.material.color = ColorDictionary.GetColor(Slots[0].ItemOnSlot.SortingColor);
             _isComplete = true;
         }
 
