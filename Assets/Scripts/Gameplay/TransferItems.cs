@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Gameplay.Islands;
 using Gameplay.Slots;
+using Gameplay.SortableItems;
 using UnityEngine;
 using Utility;
 
@@ -50,7 +51,7 @@ namespace Gameplay
                 float delay = i * MoveDelay;
                 bool isLastManMoving = false || i == availableSlotCount - 1;
 
-                slotsToMove[i].ItemOnSlot.MoveToIsland(targetIsland, path, delay, lineRenderer, isLastManMoving);
+                slotsToMove[i].ItemOnSlot.GetComponent<SortableMovement>().MoveToIsland(targetIsland, path, delay, lineRenderer, isLastManMoving);
             }
         }
     }

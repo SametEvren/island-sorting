@@ -11,7 +11,5 @@ namespace Gameplay.SortableItems
         public SortingColor SortingColor => sortingColor;
 
         public virtual void SetSortingColor(SortingColor newColor) => sortingColor = newColor;
-
-        public abstract void MoveToIsland(Island island, List<Transform> pathPoints, float delay, LineRenderer lineRenderer, bool isLastManMoving);
     }
 }

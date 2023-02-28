@@ -1497,8 +1497,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   line: {fileID: 8588094136082443135, guid: af4f49be1e2a7f9449f5f0e03df42a25, type: 3}
-  _startingIsland: {fileID: 0}
-  _targetIsland: {fileID: 0}
 --- !u!4 &498341536
 Transform:
   m_ObjectHideFlags: 0
@@ -3766,19 +3764,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1017038292115321334, guid: cfb03fe2574fdac4dbcf10de782ace6a, type: 3}
       propertyPath: itemColor
-      value: 4
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 1017038292301768593, guid: cfb03fe2574fdac4dbcf10de782ace6a, type: 3}
       propertyPath: itemColor
-      value: 4
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 1017038292645136283, guid: cfb03fe2574fdac4dbcf10de782ace6a, type: 3}
       propertyPath: itemColor
-      value: 4
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 1017038292874184130, guid: cfb03fe2574fdac4dbcf10de782ace6a, type: 3}
       propertyPath: itemColor
-      value: 4
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 1017038293105764749, guid: cfb03fe2574fdac4dbcf10de782ace6a, type: 3}
       propertyPath: itemColor

@@ -1953,6 +1953,7 @@ GameObject:
   - component: {fileID: 7106222758113881941}
   - component: {fileID: 3782587345112495407}
   - component: {fileID: 7626159178492212716}
+  - component: {fileID: 1559553965753457451}
   m_Layer: 0
   m_Name: Character
   m_TagString: Untagged
@@ -2011,7 +2012,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sortingColor: 5
   skinnedMeshRenderer: {fileID: 4715553314412483188}
-  _speed: 0
+--- !u!114 &1559553965753457451
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7626159178492212719}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 32bf28e5c45247ee9358a156e23a8d73, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7849825606445366738
 GameObject:
   m_ObjectHideFlags: 0
