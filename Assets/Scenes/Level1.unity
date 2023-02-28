@@ -2974,7 +2974,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a069bfe46aadd7e469f84a709a621181, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lastMovedGroup: []
+  currentGroup:
+    transformList: []
+  lastMovedGroupListOfLists:
+    movedGroups: []
+  storedCount: 0
 --- !u!1 &1386300010 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1686021177304871604, guid: ebee340de387f334f9ac44e044abd8fb, type: 3}
