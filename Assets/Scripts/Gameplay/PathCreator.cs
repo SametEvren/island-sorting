@@ -9,7 +9,7 @@ namespace Gameplay
     public class PathCreator : MonoBehaviour
     {
         [SerializeField] private LineRenderer line;
-        public Island _startingIsland, _targetIsland;
+        public Island startingIsland, targetIsland;
     
         public static event Action<bool,Island> OnIslandSelected;
     
@@ -22,49 +22,47 @@ namespace Gameplay
         {
             if (tappedIsland.IsComplete) return;
         
-            if (_startingIsland is null)
+            if (startingIsland is null)
             {
                 if (tappedIsland.emptySlots.Count == 16)
                     return;
             
-                _startingIsland = tappedIsland;
-                OnIslandSelected(true,tappedIsland);
+                startingIsland = tappedIsland;
+                OnIslandSelected?.Invoke(true, tappedIsland);
                 return;
             }
         
-            if (_startingIsland == tappedIsland)
-            {  
-                OnIslandSelected(false,tappedIsland);
+            if (startingIsland == tappedIsland)
+            {
+                OnIslandSelected?.Invoke(false, tappedIsland);
                 ResetSelection();
                 return;
             }
 
-            var areColorsDifferent = _startingIsland.FindColorOfTargetIsland(_startingIsland) !=
+            var areColorsDifferent = startingIsland.FindColorOfTargetIsland(startingIsland) !=
                 tappedIsland.FindColorOfTargetIsland(tappedIsland) && tappedIsland.FindColorOfTargetIsland(tappedIsland) != SortingColor.Blank;
         
             if (areColorsDifferent)
             {
-                OnIslandSelected(false,tappedIsland);
+                OnIslandSelected?.Invoke(false, tappedIsland);
                 ResetSelection();
                 return;
             }
-        
-            OnIslandSelected(false,tappedIsland);
 
-            _targetIsland = tappedIsland;
-            var path = CalculatePath(_startingIsland, _targetIsland);
+            OnIslandSelected?.Invoke(false, tappedIsland);
+
+            targetIsland = tappedIsland;
+            var path = CalculatePath(startingIsland, targetIsland);
             var lineRenderer = Instantiate(line, Vector3.zero, Quaternion.identity,transform);
             DrawPath(path, lineRenderer);
-            _startingIsland.TransferItems(_targetIsland, path, lineRenderer);
+            startingIsland.TransferItems(targetIsland, path, lineRenderer);
             ResetSelection();
         }
-
-    
-
+        
         private void ResetSelection()
         {
-            _startingIsland = null;
-            _targetIsland = null;
+            startingIsland = null;
+            targetIsland = null;
         }
     
         private void DrawPath(List<Transform> path, LineRenderer lineRenderer)
@@ -76,8 +74,7 @@ namespace Gameplay
                 lineRenderer.SetPosition(i,path[i].position);
             }
         }
-    
-
+        
         private List<Transform> CalculatePath(Island from, Island to)
         {
             return new List<Transform>
