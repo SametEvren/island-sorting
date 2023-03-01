@@ -50,7 +50,7 @@ namespace Gameplay.Islands
 
         private void CheckIfComplete()
         {
-            if (Slots.Any(slot => slot.ItemOnSlot is null || slot.ItemOnSlot.SortingColor != Slots[0].ItemOnSlot.SortingColor))
+            if (Slots.Any(slot => slot.ItemOnSlot is null || slot.ItemOnSlot.SortingColor != Slots[0].ItemOnSlot.SortingColor || slot.ItemOnSlot.IsHidden))
             {
                 _isComplete = false;
                 flagOfIsland.gameObject.SetActive(false);
