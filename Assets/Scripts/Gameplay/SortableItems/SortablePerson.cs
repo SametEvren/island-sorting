@@ -9,7 +9,6 @@ namespace Gameplay.SortableItems
         [SerializeField] private SkinnedMeshRenderer skinnedMeshRenderer;
         [SerializeField] private GameObject questionMark;
         
-
         private void Start()
         {
             UpdateMaterialColor();

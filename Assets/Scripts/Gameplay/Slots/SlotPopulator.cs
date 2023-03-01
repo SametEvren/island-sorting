@@ -69,6 +69,5 @@ namespace Gameplay.Slots
         
             Gizmos.DrawSphere(transform.position,0.03f);
         }
-    
     }
 }
