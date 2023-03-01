@@ -1,11 +1,8 @@
-using System;
 using DG.Tweening;
-using Gameplay;
 using Level;
 using Managers;
 using TMPro;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 namespace UI
