@@ -5,6 +5,7 @@ using Managers;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 namespace UI
 {
@@ -12,6 +13,7 @@ namespace UI
     {
         [SerializeField] private UndoButtonView undoButtonView;
         [SerializeField] private CanvasGroup winScreen;
+        [SerializeField] private Button restartButton;
 
         private void Start()
         {
@@ -25,7 +27,12 @@ namespace UI
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
 
-        public void ShowWinScreen() => RevealCanvasGroup(winScreen);
+        public void ShowWinScreen()
+        {
+            undoButtonView.Disable();
+            restartButton.interactable = false;
+            RevealCanvasGroup(winScreen);
+        } 
         
         private void RenderUndo()
         {
@@ -40,7 +47,7 @@ namespace UI
             {
                 canvasGroup.interactable = true;
                 canvasGroup.blocksRaycasts = true;
-            });
+            }).SetDelay(1f);
         }
         
         private void OnDestroy()

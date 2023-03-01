@@ -212,6 +212,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   undoButtonView: {fileID: 6601569771947447261}
   winScreen: {fileID: 6601569771689806027}
+  restartButton: {fileID: 6601569772437473179}
 --- !u!1 &6601569771876548077
 GameObject:
   m_ObjectHideFlags: 0
@@ -438,6 +439,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   remainingText: {fileID: 6601569772866921926}
+  button: {fileID: 6601569771947447248}
 --- !u!1 &6601569772022311235
 GameObject:
   m_ObjectHideFlags: 0
