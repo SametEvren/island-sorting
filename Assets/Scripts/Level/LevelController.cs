@@ -1,11 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using Gameplay.Islands;
 using Gameplay.SortableItems;
 using UnityEngine;
 
-namespace Gameplay
+namespace Level
 {
     public class LevelController : MonoBehaviour
     {

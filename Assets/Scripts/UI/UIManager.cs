@@ -1,6 +1,7 @@
 using System;
 using DG.Tweening;
 using Gameplay;
+using Level;
 using Managers;
 using TMPro;
 using UnityEngine;
@@ -14,19 +15,31 @@ namespace UI
         [SerializeField] private UndoButtonView undoButtonView;
         [SerializeField] private CanvasGroup winScreen;
         [SerializeField] private Button restartButton;
+        [SerializeField] private TextMeshProUGUI levelText;
 
         private void Start()
         {
             RenderUndo();
+            RenderLevelText();
             MovementManager.OnUndo += RenderUndo;
             LevelController.OnWin += ShowWinScreen;
         }
 
-        public void RestartTheLevel()
+        private void RenderLevelText()
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            levelText.SetText("Level " + (LevelLoader.Level + 1));
         }
 
+        public void HandleRestartPressed()
+        {
+            LevelLoader.RestartLevel();
+        }
+
+        public void HandleNextPressed()
+        {
+            LevelLoader.NextLevel();    
+        }
+        
         public void ShowWinScreen()
         {
             undoButtonView.Disable();

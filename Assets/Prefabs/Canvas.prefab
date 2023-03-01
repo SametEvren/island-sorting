@@ -213,6 +213,7 @@ MonoBehaviour:
   undoButtonView: {fileID: 6601569771947447261}
   winScreen: {fileID: 6601569771689806027}
   restartButton: {fileID: 6601569772437473179}
+  levelText: {fileID: 6601569772700382122}
 --- !u!1 &6601569771876548077
 GameObject:
   m_ObjectHideFlags: 0
@@ -327,11 +328,11 @@ RectTransform:
   m_Father: {fileID: 6601569771721382510}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 120, y: -90}
+  m_AnchorMin: {x: 0.5, y: 1}
+  m_AnchorMax: {x: 0.5, y: 1}
+  m_AnchoredPosition: {x: -120, y: -90}
   m_SizeDelta: {x: 80, y: 62.5}
-  m_Pivot: {x: 0, y: 1}
+  m_Pivot: {x: 0.5, y: 1}
 --- !u!222 &6601569771947447250
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -696,7 +697,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 6601569772145215405}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 6601569771721382505}
+        m_TargetAssemblyTypeName: UI.UIManager, Assembly-CSharp
+        m_MethodName: HandleNextPressed
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &6601569772295973749
 GameObject:
   m_ObjectHideFlags: 0
@@ -943,11 +956,11 @@ RectTransform:
   m_Father: {fileID: 6601569771721382510}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 1, y: 1}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -120, y: -90}
+  m_AnchorMin: {x: 0.5, y: 1}
+  m_AnchorMax: {x: 0.5, y: 1}
+  m_AnchoredPosition: {x: 120, y: -90}
   m_SizeDelta: {x: 80, y: 62.5}
-  m_Pivot: {x: 1, y: 1}
+  m_Pivot: {x: 0.5, y: 1}
 --- !u!222 &6601569772437473253
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1032,7 +1045,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 6601569771721382505}
         m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
-        m_MethodName: RestartTheLevel
+        m_MethodName: HandleRestartPressed
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
