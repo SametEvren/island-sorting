@@ -26,7 +26,14 @@ namespace Managers
         public int RemainingUndos { get; private set; } = 5;
         
         private int UndoableMoveCount => undoableMoves.Count;
-        public static event Action OnUndo; 
+        public static event Action OnUndo;
+
+        private void Start()
+        {
+            currentMovement.movements.Clear();
+            undoableMoves.Clear();
+        }
+
         public void UndoMovement()
         {
             if (UndoableMoveCount <= 0 || RemainingUndos <= 0)
