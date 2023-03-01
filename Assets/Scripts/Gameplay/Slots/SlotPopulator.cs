@@ -1,16 +1,32 @@
-﻿using Gameplay.SortableItems;
+﻿using System.Collections.Generic;
+using Gameplay.Islands;
+using Gameplay.SortableItems;
 using UnityEngine;
+using UnityEngine.Assertions;
 using Utility;
 
 namespace Gameplay.Slots
 {
     public class SlotPopulator : MonoBehaviour
     {
+        [SerializeField] private Slot slot;
+        
+        [Header("Item Properties")]
         [SerializeField] private SortableItem itemPrefab;
         [SerializeField] private SortingColor itemColor = SortingColor.Blank;
         [SerializeField] private bool isHidden;
-        [SerializeField] private Slot slot;
-
+        
+        [Header("Barricade")]
+        [SerializeField] private List<GameObject> barricadePrefabs;
+        [SerializeField] private bool isBarricade;
+        
+        private void OnValidate()
+        {
+            Assert.IsNotNull(slot);
+            Assert.IsNotNull(itemPrefab);
+            Assert.IsNotNull(barricadePrefabs);
+        }
+        
         private void Start()
         {
             PopulateSlot();
@@ -22,6 +38,14 @@ namespace Gameplay.Slots
             {
                 Destroy(slot.ItemOnSlot.gameObject);
                 slot.SetItemOnSlot(null);
+            }
+
+            if (isBarricade)
+            {
+                var choosenPrefab = barricadePrefabs[Random.Range(0, barricadePrefabs.Count)];
+                var barricade = Instantiate(choosenPrefab, transform.position, transform.parent.rotation, transform.parent);
+                slot.transform.parent.parent.GetComponent<Island>().Slots.Remove(slot);
+                Destroy(slot.gameObject);
             }
 
             if (itemColor == SortingColor.Blank)

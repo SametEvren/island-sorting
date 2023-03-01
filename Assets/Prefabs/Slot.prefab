@@ -58,6 +58,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b61ea807a59d42bf91b3892fe64b72cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  slot: {fileID: 7936761109454494813}
   itemPrefab: {fileID: 7626159178492212716, guid: df5a33be13421a74bbdb3c8601592b9d, type: 3}
   itemColor: -1
-  slot: {fileID: 7936761109454494813}
+  isHidden: 0
+  barricadePrefabs:
+  - {fileID: 7405846476849542632, guid: c6308cb7062fac34e8e50600086b12a1, type: 3}
+  - {fileID: 5202732821079448320, guid: cebfacc247a640945a2c30b442202fca, type: 3}
+  - {fileID: 4680757731160225450, guid: 0fde05fa0f3321942a21896ff4f0856f, type: 3}
+  - {fileID: 8783306491908617939, guid: f02116c209ecd9e488fc4d2cd8996133, type: 3}
+  - {fileID: 1576488453971893466, guid: a778b631c6253a04899cb31bad047c81, type: 3}
+  isBarricade: 0

@@ -6,7 +6,6 @@ namespace Gameplay.Slots
 {
     public class Slot : MonoBehaviour
     {
-
         public SortableItem itemOnSlot;
         public SortableItem ItemOnSlot => itemOnSlot;
         public bool IsEmpty => ItemOnSlot is null;
