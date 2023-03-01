@@ -10,7 +10,7 @@ namespace Gameplay.Islands
 {
     public class Island : MonoBehaviour
     {
-        private const uint RowLength = 4;
+        public const int RowLength = 4;
 
         [SerializeField] private List<Slot> slots;
         [SerializeField] private Transform accessPoint;

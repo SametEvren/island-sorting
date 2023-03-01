@@ -7,6 +7,8 @@ namespace Gameplay.SortableItems
     public class SortablePerson : SortableItem
     {
         [SerializeField] private SkinnedMeshRenderer skinnedMeshRenderer;
+        [SerializeField] private GameObject questionMark;
+        
 
         private void Start()
         {
@@ -17,6 +19,19 @@ namespace Gameplay.SortableItems
         {
             targetSlot.SetItemOnSlot(this);
         }
+
+        public override void SetHidden(bool hidden)
+        {
+            base.SetHidden(hidden);
+            RenderPlayerModel();
+        }
+
+        private void RenderPlayerModel()
+        {
+            skinnedMeshRenderer.enabled = !IsHidden;
+            questionMark.SetActive(IsHidden);
+        }
+        
         public override void SetSortingColor(SortingColor newColor)
         {
             base.SetSortingColor(newColor);

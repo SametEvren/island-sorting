@@ -51,6 +51,7 @@ namespace Gameplay
             var movementManager = MovementManager.instance;
             
             movementManager.currentMovement.movements.Clear();
+            
             for (var i = 0; i < availableSlotCount; i++)
             {
                 float delay = i * MoveDelay;

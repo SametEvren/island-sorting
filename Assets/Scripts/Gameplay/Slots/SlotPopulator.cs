@@ -8,6 +8,7 @@ namespace Gameplay.Slots
     {
         [SerializeField] private SortableItem itemPrefab;
         [SerializeField] private SortingColor itemColor = SortingColor.Blank;
+        [SerializeField] private bool isHidden;
         [SerializeField] private Slot slot;
 
         private void Start()
@@ -29,6 +30,7 @@ namespace Gameplay.Slots
             var item = Instantiate(itemPrefab, transform.position, transform.parent.rotation, transform);
             item.SetSortingColor(itemColor);
             slot.SetItemOnSlot(item);
+            slot.ItemOnSlot.SetHidden(isHidden);
         }
 
         private void OnDrawGizmos()

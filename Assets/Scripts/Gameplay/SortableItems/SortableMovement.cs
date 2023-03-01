@@ -43,7 +43,9 @@ namespace Gameplay.SortableItems
                 
                 StopCoroutine(_followCoroutine);
             }
-        
+
+            CheckForReveals();
+            
             _lineRenderer = lineRenderer;
             _currentSlot.ClearSlot();
             var targetSlot = island.emptySlots[0];
@@ -57,6 +59,22 @@ namespace Gameplay.SortableItems
             howManyTimesMoved++;
             
             _followCoroutine = StartCoroutine(FollowPath(pathPoints, targetSlot,delay,lineRenderer,isLastManMoving));
+        }
+
+        private void CheckForReveals()
+        {
+            var currentIsland = _currentSlot.transform.parent.parent.GetComponent<Island>();
+            var selfSlotId = (currentIsland.Slots.Count - currentIsland.EmptySlotCount - 1);
+            var revealSlotId = selfSlotId - Island.RowLength;
+
+            if (revealSlotId >= 0)
+            {
+                var itemToBeRevealed = currentIsland.Slots[revealSlotId].ItemOnSlot;
+                if (itemToBeRevealed.IsHidden)
+                {
+                    itemToBeRevealed.SetHidden(false);
+                }
+            }
         }
 
         private IEnumerator FollowPath(List<Transform> pathPoints, Slot targetSlot, float delay, LineRenderer lineRenderer, bool isLastManMoving)
