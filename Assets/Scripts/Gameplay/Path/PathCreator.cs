@@ -24,7 +24,7 @@ namespace Gameplay.Path
 
             if (_path.StartingIsland is null)
             {
-                if (tappedIsland.EmptySlotCount == 16)
+                if (tappedIsland.IsEmpty)
                     return;
 
                 _path.StartingIsland = tappedIsland;
@@ -39,9 +39,17 @@ namespace Gameplay.Path
                 return;
             }
 
+            
+            if (tappedIsland.EmptySlotCount == 0)
+            {
+                OnIslandSelected?.Invoke(false, _path.StartingIsland);
+                _path.Reset();
+                return;
+            }
+            
             var areColorsDifferent = IslandHelper.FindColorOfTargetIsland(_path.StartingIsland) !=
                 IslandHelper.FindColorOfTargetIsland(tappedIsland) && IslandHelper.FindColorOfTargetIsland(tappedIsland) != SortingColor.Blank;
-
+            
             if (areColorsDifferent)
             {
                 OnIslandSelected?.Invoke(false, tappedIsland);
